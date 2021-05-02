@@ -27,7 +27,6 @@ spec:
 EOF
 
 kubectl certificate approve k8s-webhook.default  
-kubectl get csr
 kubectl get csr k8s-webhook.default -o jsonpath='{.status.certificate}' | base64 --decode > server.crt
 kubectl create secret tls --save-config  k8s-webhook-secret --key server-key.pem --cert server.crt
 
