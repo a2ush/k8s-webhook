@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-webhook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-webhook
+  template:
+    metadata:
+      labels:
+        app: k8s-webhook
+    spec:
+      initContainers:
+      - name: go-build
+        image: golang:1.15.11
+        command: ["/bin/sh", "-c"]
+        args:
+        - git clone https://github.com/a2ush/k8s-webhook.git && go build k8s-webhook/src/main.go
+        volumeMounts:
+        - name: share-volume
+          mountPath: /go         
+      containers:
+      - name: server
+        image: amazonlinux:2
+        command: ["/mnt/main"]
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: share-volume
+          mountPath: /mnt
+        - name: tls
+          mountPath: /tls
+      volumes:
+      - name: share-volume
+        emptyDir:          
+      - name: tls
+        secret:
+          secretName: k8s-webhook-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-webhook
+spec:
+  selector:
+    app: k8s-webhook
+  ports:
+  - port: 443
+    protocol: TCP
+    targetPort: 8080
