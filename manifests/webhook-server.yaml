@@ -20,7 +20,7 @@ spec:
         - git clone https://github.com/a2ush/k8s-webhook.git && cd k8s-webhook/src && go build -o webhook-server && mv webhook-server /mnt/
         volumeMounts:
         - name: share-volume
-          mountPath: /mnt        
+          mountPath: /mnt
       containers:
       - name: server
         image: amazonlinux:2
@@ -34,7 +34,7 @@ spec:
           mountPath: /tls
       volumes:
       - name: share-volume
-        emptyDir:          
+        emptyDir:
       - name: tls
         secret:
           secretName: k8s-webhook-secret
