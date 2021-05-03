@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"log"
 
-	"github.com/a2ush/k8s-webhook/webhook"
+	"github.com/a2ush/k8s-webhook/src/webhook"
 )
 
 func main() {
