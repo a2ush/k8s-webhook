@@ -74,7 +74,7 @@ $ kubectl create secret tls --save-config  k8s-webhook-secret --key server-key.p
 
 Deploy webhook-server
 ```bash
-$ kubectl apply -f https://github.com/a2ush/k8s-webhook/blob/main/manifests/webhook-server.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/a2ush/k8s-webhook/main/manifests/webhook-server.yaml
 ```
 
 Deploy MutatingWebhookConfiguration / ValidatingWebhookConfiguration
