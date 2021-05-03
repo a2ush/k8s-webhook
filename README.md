@@ -18,6 +18,17 @@ I hope this repo helps you create your original webhook :)
 $ git clone https://github.com/a2ush/k8s-webhook.git
 $ cd k8s-webhook
 $ ./deploy.sh
+2021/05/03 03:39:33 [INFO] generate received request
+2021/05/03 03:39:33 [INFO] received CSR
+2021/05/03 03:39:33 [INFO] generating key: ecdsa-256
+2021/05/03 03:39:33 [INFO] encoded CSR
+certificatesigningrequest.certificates.k8s.io/k8s-webhook.default created
+certificatesigningrequest.certificates.k8s.io/k8s-webhook.default approved
+secret/k8s-webhook-secret created
+deployment.apps/k8s-webhook created
+service/k8s-webhook created
+mutatingwebhookconfiguration.admissionregistration.k8s.io/k8s-mutating-webhook created
+validatingwebhookconfiguration.admissionregistration.k8s.io/k8s-validating-webhook created
 ```
 
 ### 2. Manual deployment without `git clone` command
