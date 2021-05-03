@@ -17,14 +17,14 @@ spec:
         image: golang:1.15.11
         command: ["/bin/sh", "-c"]
         args:
-        - git clone https://github.com/a2ush/k8s-webhook.git && go build k8s-webhook/src/main.go
+        - git clone https://github.com/a2ush/k8s-webhook.git && cd k8s-webhook/src && go build -o webhook-server && mv webhook-server /mnt/
         volumeMounts:
         - name: share-volume
-          mountPath: /go         
+          mountPath: /mnt        
       containers:
       - name: server
         image: amazonlinux:2
-        command: ["/mnt/main"]
+        command: ["/mnt/webhook-server"]
         ports:
         - containerPort: 8080
         volumeMounts:
