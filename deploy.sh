@@ -14,11 +14,12 @@ cat <<EOF | cfssl genkey - | cfssljson -bare server
 EOF
 
 cat <<EOF | kubectl apply -f -
-apiVersion: certificates.k8s.io/v1beta1
+apiVersion: certificates.k8s.io/v1
 kind: CertificateSigningRequest
 metadata:
   name: k8s-webhook.default
 spec:
+  signerName: beta.eks.amazonaws.com/app-serving # see https://docs.aws.amazon.com/eks/latest/userguide/cert-signing.html
   request: $(cat server.csr | base64 -w 0)
   usages:
   - digital signature
